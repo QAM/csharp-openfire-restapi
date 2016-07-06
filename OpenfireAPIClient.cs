@@ -112,5 +112,27 @@ namespace OpenfireAPI
         public bool deleteSystemProperty(String propertyName) {
             return client.isStatusCodeOK(client.delete("system/properties/"+ propertyName, null, new Dictionary<string, string>()));
         }
+
+        public GroupEntities getGroups() {
+            IRestResponse response = client.get("groups" , new Dictionary<string, string>());
+            return client.isStatusCodeOK(response) ? deserial.Deserialize<GroupEntities>(response) : null;
+        }
+
+        public GroupEntity getGroup(string groupName) {
+            IRestResponse response = client.get("groups/" + groupName, new Dictionary<string, string>());
+            return client.isStatusCodeOK(response) ? deserial.Deserialize<GroupEntity>(response) : null;
+        }
+
+        public bool createGroup(GroupEntity groupEntity) {
+            return client.isStatusCodeOK(client.post("groups", groupEntity, new Dictionary<string, string>()));
+        }
+
+        public bool deleteGroup(string groupName) {
+            return client.isStatusCodeOK(client.delete("groups/" + groupName, null, new Dictionary<string, string>()));
+        }
+
+        public bool updateGroup(GroupEntity groupEntity) {
+            return client.isStatusCodeOK(client.put("groups/" + groupEntity.name, groupEntity, new Dictionary<string, string>()));
+        }
     }
 }
