@@ -6,8 +6,8 @@ using System.Threading.Tasks;
 
 namespace OpenfireAPI.entity
 {
-    class UserEntities
+    class RosterEntities
     {
-        public List<UserEntity> user { get; set; }
+        public List<RosterEntity> rosterItem { get; set; }
     }
 }

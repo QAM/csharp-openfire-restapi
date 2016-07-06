@@ -6,7 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using RestSharp;
 
-namespace OpenfireTest.OpenfireAPI
+namespace OpenfireAPI.util
 {
     class OpenfireAuthenticator : IAuthenticator
     {

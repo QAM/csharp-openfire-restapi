@@ -6,8 +6,8 @@ using System.Threading.Tasks;
 
 namespace OpenfireAPI.entity
 {
-    class UserEntities
+    class UserGroupsEntiry
     {
-        public List<UserEntity> user { get; set; }
+        public List<string> groupname { get; set; }
     }
 }

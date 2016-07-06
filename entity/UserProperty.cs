@@ -6,8 +6,9 @@ using System.Threading.Tasks;
 
 namespace OpenfireAPI.entity
 {
-    class UserEntities
+    class UserProperty
     {
-        public List<UserEntity> user { get; set; }
+        public string key { get; set; }
+        public string value { get; set; }
     }
 }

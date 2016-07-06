@@ -6,8 +6,13 @@ using System.Threading.Tasks;
 
 namespace OpenfireAPI.entity
 {
-    class UserEntities
+    class RosterGroup
     {
-        public List<UserEntity> user { get; set; }
+        public string group { get; set; }
+
+        public override string ToString()
+        {
+            return group;
+        }
     }
 }

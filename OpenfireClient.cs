@@ -1,4 +1,5 @@
-﻿using RestSharp;
+﻿using OpenfireAPI.util;
+using RestSharp;
 using RestSharp.Authenticators;
 using System;
 using System.Collections.Generic;
@@ -7,7 +8,7 @@ using System.Net;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace OpenfireTest.OpenfireAPI
+namespace OpenfireAPI
 {
     class OpenfireClient
     {
@@ -37,9 +38,9 @@ namespace OpenfireTest.OpenfireAPI
             return call(Method.PUT, restPath, payload, queryParams);
         }
 
-        public IRestResponse delete(string restPath, Dictionary<string, string> queryParams)
+        public IRestResponse delete(string restPath, object payload, Dictionary<string, string> queryParams)
         {
-            return call(Method.DELETE, restPath, null, queryParams);
+            return call(Method.DELETE, restPath, payload, queryParams);
         }
 
         private IRestResponse call(Method method, string restPath, object payload, Dictionary<string, string> queryParams)
@@ -55,6 +56,7 @@ namespace OpenfireTest.OpenfireAPI
             if (payload != null)
             {
                 request.AddHeader("Content-Type", "application/json");
+                request.JsonSerializer = new RestSharpJsonNetSerializer();
                 request.AddJsonBody(payload);
             }
             return restClient.Execute(request);
@@ -62,6 +64,7 @@ namespace OpenfireTest.OpenfireAPI
 
         public bool isStatusCodeOK(IRestResponse response)
         {
+            Console.WriteLine(response.StatusCode);
             return response.StatusCode == HttpStatusCode.OK || response.StatusCode == HttpStatusCode.Created;
         }
 
