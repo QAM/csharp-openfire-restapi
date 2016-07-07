@@ -3,12 +3,12 @@ csharp-openfire-restapi
 
 csharp-openfire-restapi is an C# based Client for the Openfire REST API Plugin which provides the ability to manage Openfire instance by sending an REST/HTTP request to the server.
 
-I write this library for my own project. Because of referring to JAVA REST-API-CLIENT, I release the library for users which creates website and integrate it with openfire for XMPP chat APP.
+I write this library for my own project. Because of referring to JAVA [REST-API-CLIENT](https://github.com/igniterealtime/REST-API-Client), I release the library for users which creates website and integrate it with openfire for XMPP chat APP.
 
 ----------
 Dependency
 -------------
-I use RestSharp for basic REST API. Please refer to [RestSharp](http://restsharp.org/) and install it in visual studio.
+I use RestSharp for basic REST API and JSON.NET. Please refer to [RestSharp](http://restsharp.org/) and [JSON.NET](https://www.nuget.org/packages/Newtonsoft.Json/9.0.1-beta1) and install it in visual studio.
 
 Examples
 -------------
@@ -18,11 +18,12 @@ Examples
  - Secret Key Authentication
  
 >// Basic HTTP Authentication
->HttpBasicAuthenticator authenticator = new HttpBasicAuthenticator("admin", "testPassword");
+>OpenfireAuthenticator authenticator = new OpenfireAuthenticator("admin", "testPassword");
 >OpenfireAPIClient client = new OpenfireAPIClient("http://45.33.57.215", 9090, authenticator);
 >
 >// Shared secret key
->OpenfireAPIClient client = new OpenfireAPIClient("http://45.33.57.215", 9090, null, "2A98Q7sk0OEEHEz3");
+>OpenfireAuthenticator authenticator = new OpenfireAuthenticator("shared secret key");
+>OpenfireAPIClient client = new OpenfireAPIClient("http://45.33.57.215", 9090, , authenticator);
 
 
 **User Related Example**
