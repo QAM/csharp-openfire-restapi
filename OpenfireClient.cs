@@ -14,12 +14,10 @@ namespace OpenfireAPI
     {
         private RestClient restClient;
         private string openfirePlugin;
-        public OpenfireClient(string url, int port, HttpBasicAuthenticator authenticator = null, string sharedKey = "")
+        public OpenfireClient(string url, int port, OpenfireAuthenticator authenticator)
         {
             restClient = new RestClient(url+":"+port.ToString());
-            if (authenticator == null) restClient.Authenticator = new OpenfireAuthenticator(sharedKey);
-            else restClient.Authenticator = authenticator;
-
+            restClient.Authenticator = authenticator;
             openfirePlugin = "/plugins/restapi/v1/";
         }
 
@@ -64,7 +62,7 @@ namespace OpenfireAPI
 
         public bool isStatusCodeOK(IRestResponse response)
         {
-            Console.WriteLine(response.StatusCode);
+            //Console.WriteLine(response.StatusCode);
             return response.StatusCode == HttpStatusCode.OK || response.StatusCode == HttpStatusCode.Created;
         }
 

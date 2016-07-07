@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using RestSharp.Deserializers;
+using OpenfireAPI.util;
 
 namespace OpenfireAPI
 {
@@ -14,8 +15,8 @@ namespace OpenfireAPI
     {
         private OpenfireClient client;
         private JsonDeserializer deserial;
-        public OpenfireAPIClient(string url, int port, HttpBasicAuthenticator authenticator = null, string sharedKey="") {
-            client = new OpenfireClient(url, port, authenticator, sharedKey);
+        public OpenfireAPIClient(string url, int port, OpenfireAuthenticator authenticator) {
+            client = new OpenfireClient(url, port, authenticator);
             deserial = new JsonDeserializer();
         }
 
@@ -133,6 +134,28 @@ namespace OpenfireAPI
 
         public bool updateGroup(GroupEntity groupEntity) {
             return client.isStatusCodeOK(client.put("groups/" + groupEntity.name, groupEntity, new Dictionary<string, string>()));
+        }
+
+        //TODO: /system/statistics/sessions
+        //TODO: Chatroom
+
+        public SessionEntities getSessions()
+        {
+            IRestResponse response = client.get("sessions", new Dictionary<string, string>());
+            return client.isStatusCodeOK(response) ? deserial.Deserialize<SessionEntities>(response) : null;
+        }
+
+        public SessionEntities getSessions(string username) {
+            IRestResponse response = client.get("sessions/" + username, new Dictionary<string, string>());
+            return client.isStatusCodeOK(response) ? deserial.Deserialize<SessionEntities>(response) : null;
+        }
+
+        public bool closeSessions(string username) {
+            return client.isStatusCodeOK(client.delete("sessions/" + username, null, new Dictionary<string, string>()));
+        }
+
+        public bool broadcastMsg(MessageEntity messageEntity) {
+            return client.isStatusCodeOK(client.post("messages/users", messageEntity, new Dictionary<string, string>()));
         }
     }
 }
