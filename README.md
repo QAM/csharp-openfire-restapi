@@ -37,9 +37,4 @@ Examples
 >bool result = client.createUser(new UserEntity { username = "test", email = "test@gmail.com", name = "test", password = "ZAQ!2wsx"});
 >
 
->//create RestAPIClient with HTTP basic Authentication
->HttpBasicAuthenticator authenticator = new HttpBasicAuthenticator("admin", "testPassword");
->OpenfireAPIClient client = new OpenfireAPIClient("http://testdomain.com", 9090, authenticator);
->//create RestAPIClient with Secret Key Authentication
->OpenfireAPIClient client = new OpenfireAPIClient("http://testdomain.com", 9090, null, "2A98Q7sk0OEEHEz3");
 
